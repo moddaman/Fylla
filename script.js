@@ -32,6 +32,13 @@
             e.preventDefault();
         });
 
+         $('#searchInput').on('input', function() {
+            // get the current value of the input field.
+            console.log("change")
+            search($("#searchInput").val());
+           
+        });
+
 
 
         function search(query) {
@@ -44,6 +51,9 @@
                     addToHtml(items[i]);
                     countResults++;
 
+                }
+                if(countResults>100){
+                	break;
                 }
             }
             console.log("results: "+countResults);
