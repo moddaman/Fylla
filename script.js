@@ -7,7 +7,13 @@
 
             for (var i = 0; i < data.length; i++) {
                 items[i] = data[i];
+                items[i].best = items[i].Literpris / items[i].Alkohol;
             }
+            items.sort(function(a, b) {
+                return parseFloat(a.best) - parseFloat(b.best);
+            });
+
+
             console.log('Vin size: ' + items.length);
             add100FirstRandomShitFuck();
 
@@ -33,8 +39,9 @@
             for (var i = 0; i < list.length; i++) {
                 v = list[i];
                 s += '<article><h4>' + v.Varenavn + '</h4>';
-                s += 'Pris: ' + v.Pris + ' ( ' + v.Literpris + ' per liter) <br>';
-                s += 'Alkohol: ' + v.Alkohol + '%';
+                s += 'Pris: ' + v.Pris + ' ( ' + v.Literpris + ' per liter) '+v.Volum+'L<br>';
+                s += 'Alkohol: ' + v.Alkohol + '%<br>';
+                s += 'Best : ' + v.best.toFixed(2) + ' (pris per Alkohol)';
                 s += '</article>';
             }
             $('#wines').empty();
@@ -70,12 +77,12 @@
 
             $('#wines').empty();
             console.log("searching for " + query);
-        
-            var list =[];
+
+            var list = [];
             for (var i = 0; i < items.length; i++) {
-                if (items[i].Varenavn.toLowerCase().indexOf(query.toLowerCase()) > 1) {  
+                if (items[i].Varenavn.toLowerCase().indexOf(query.toLowerCase()) > 1) {
                     list.push(items[i]);
-                 }
+                }
                 if (list.length > 100) {
                     break;
                 }
