@@ -4,10 +4,10 @@
 }
 
 h1, h2 {
-        font-family: Darleston, arial;
-        display: inline;
-        font-size: 7em;
-        margin: 8px;
+    font-family: Darleston, arial;
+    display: inline;
+    font-size: 7em;
+    margin: 8px;
 }
 
 body {
@@ -17,8 +17,49 @@ body {
     color: white;
 }
 
+.ol {
+    background-color: #2ecc71;
+}
+.vin {
+    background-color: #3498db;
+}
+.musserende {
+    background-color: #e74c3c;
+}
+.akvavitt {
+    background-color: #f39c12;
+}
+
+.typer button {
+
+    width: 100%;
+    height: 41px;
+    border: 0px;
+/* border-left-color: white; *//* border-left-style: solid; *//* border-left-width: 1px; *//* background-color: black; */color: white;}
+
+.upper-row-container {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-align-content: stretch;
+    -ms-flex-line-pack: stretch;
+    align-content: stretch;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+}
+
 .content {
-	color: white;
+ color: white;
 }
 
 article {
@@ -64,7 +105,7 @@ article {
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center;
-    }
+}
 
 .topp {
 }
