@@ -46,7 +46,7 @@
             console.log("searching for " + query);
             var countResults=0;
             for (var i = 0; i < items.length; i++) {
-                if (items[i].Varenavn.indexOf(query)>1) {
+                if (items[i].Varenavn.toLowerCase().indexOf(query.toLowerCase())>1) {
                     console.log("match :" + items[i]);
                     addToHtml(items[i]);
                     countResults++;
