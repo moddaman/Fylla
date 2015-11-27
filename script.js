@@ -14,29 +14,32 @@
 
         });
 
-        function updateListInDom(){
-        	$('#wines').empty(s)
-
-        	$('#wines').append(s)
-        }
 
         function add100FirstRandomShitFuck() {
             var s = '';
             var current = 0,
                 max = 100;
-            for (var i = 0; i < max; i++) {
-                addToHtml(items[i]);
 
+            var list = [];
+            for (var i = 0; i < max; i++) {
+                list.push(items[i]);
             }
+            addListToHtml(list);
         }
 
-        function addListToHtml(v) {
-            var s = '<article><h4>' + v.Varenavn + '</h4>';
-            s += 'Pris: ' + v.Pris + ' ( ' + v.Literpris + ' per liter) <br>';
-            s += 'Alkohol: ' + v.Alkohol+'%';
-            s += '</article>';
-            return s;
-            
+        function addListToHtml(list) {
+            var s = '';
+            var v;
+            for (var i = 0; i < list.length; i++) {
+                v = list[i];
+                s += '<article><h4>' + v.Varenavn + '</h4>';
+                s += 'Pris: ' + v.Pris + ' ( ' + v.Literpris + ' per liter) <br>';
+                s += 'Alkohol: ' + v.Alkohol + '%';
+                s += '</article>';
+            }
+            $('#wines').empty();
+            $('#wines').append(s);
+
         }
 
         $('#searchForm').on('submit', function(e) {
@@ -53,35 +56,32 @@
         });
 
 
-
-        function sortList(list){
+        function sortList(list) {
 
 
         }
 
 
-
         function search(query) {
-        	if(query.length<2){
-        		add100FirstRandomShitFuck();
-        		return;
-        	}
+            if (query.length < 2) {
+                add100FirstRandomShitFuck();
+                return;
+            }
 
             $('#wines').empty();
             console.log("searching for " + query);
-            var countResults = 0;
+        
+            var list =[];
             for (var i = 0; i < items.length; i++) {
-                if (items[i].Varenavn.toLowerCase().indexOf(query.toLowerCase()) > 1) {
-                    console.log("match :" + items[i]);
-                    addToHtml(items[i]);
-                    countResults++;
-
-                }
-                if (countResults > 100) {
+                if (items[i].Varenavn.toLowerCase().indexOf(query.toLowerCase()) > 1) {  
+                    list.push(items[i]);
+                 }
+                if (list.length > 100) {
                     break;
                 }
             }
-            console.log("results: " + countResults);
+            addListToHtml(list);
+            console.log("results: " + list.length);
 
         }
 
