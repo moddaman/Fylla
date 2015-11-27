@@ -1,4 +1,5 @@
     var items;
+    var listInDom;
     $(document).ready(function() {
         $.getJSON("produkter.json", function(data) {
 
@@ -13,6 +14,12 @@
 
         });
 
+        function updateListInDom(){
+        	$('#wines').empty(s)
+
+        	$('#wines').append(s)
+        }
+
         function add100FirstRandomShitFuck() {
             var s = '';
             var current = 0,
@@ -23,12 +30,13 @@
             }
         }
 
-        function addToHtml(v) {
+        function addListToHtml(v) {
             var s = '<article><h4>' + v.Varenavn + '</h4>';
             s += 'Pris: ' + v.Pris + ' ( ' + v.Literpris + ' per liter) <br>';
-            s += 'Alkohol: ' + v.Alkohol;
+            s += 'Alkohol: ' + v.Alkohol+'%';
             s += '</article>';
-            $('#wines').append(s)
+            return s;
+            
         }
 
         $('#searchForm').on('submit', function(e) {
@@ -46,8 +54,15 @@
 
 
 
+        function sortList(list){
+
+
+        }
+
+
+
         function search(query) {
-        	if(query.length==0){
+        	if(query.length<2){
         		add100FirstRandomShitFuck();
         		return;
         	}
