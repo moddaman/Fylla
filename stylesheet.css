@@ -5,14 +5,13 @@ body {
 
 .content {
 	color: white;
-	height: 500px;
 }
 
 article {
     color:white;
 }
 
-.flex-container {
+.column-container {
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
@@ -31,4 +30,53 @@ article {
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center;
+}
+.row-container {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-align-content: stretch;
+    -ms-flex-line-pack: stretch;
+    align-content: stretch;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     }
+
+form {
+
+}
+
+input[type="text"] {
+  display: block;
+  margin: 0;
+  width: 400px;
+  height: 50px;
+  font-family: sans-serif;
+  font-size: 18px;
+  text-align: center;
+  box-shadow: none;
+  border-radius: none;
+}
+input[type="text"]:focus {
+  outline: none;
+}
+
+.btn-style{
+    border : solid 0px #ffffff;
+    font-size: 23px;
+    height: 56px;
+    color : black;
+    padding : 1px 10px;
+    background : white;
+    filter : progid:DXImageTransform.Microsoft.gradient( startColorstr='#053494', endColorstr='#addbff',GradientType=0 );
+}
