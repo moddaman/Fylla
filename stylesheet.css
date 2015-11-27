@@ -8,6 +8,10 @@ body {
 	height: 500px;
 }
 
+article {
+    color:white;
+}
+
 .flex-container {
     display: -ms-flexbox;
     display: -webkit-flex;
