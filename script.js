@@ -1,13 +1,23 @@
 $(document).ready(function() {
     $.getJSON("produkter.json", function(data) {
-        console.log(data.length);
+        console.log('Vin size: ' + data.length);
         var items = [];
-        var s='';
-        $.each(data, function(key, val) {
-            items.push("<li id='" + key + "'>" + val.Varenavn + "</li>");
-            s='<article><h4>'+val.Varenavn+'</h4>Pris: '+val.Pris+'</article>'
+        var s = '';
+        var current = 0,
+            max = 100;
 
-              $('#wines').append(s)
-        });
+
+        for (var i=0; i < max; i++) {
+        	var v = data[i];
+        	  console.log(i);
+            s = '<article><h4>' + v.Varenavn + '</h4>Pris: ' + v.Pris + '</article>';
+            addToHtml(s);
+          
+        }
+
     });
+
+    function addToHtml(s) {
+        $('#wines').append(s)
+    }
 });
