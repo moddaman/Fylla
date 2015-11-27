@@ -7,12 +7,15 @@ $(document).ready(function() {
             max = 100;
 
 
-        for (var i=0; i < max; i++) {
-        	var v = data[i];
-        	  console.log(i);
-            s = '<article><h4>' + v.Varenavn + '</h4>Pris: ' + v.Pris + '</article>';
+        for (var i = 0; i < max; i++) {
+            var v = data[i];
+            console.log(i);
+            s = '<article><h4>' + v.Varenavn + '</h4>';
+            s += 'Pris: ' + v.Pris + ' ( '+v.Literpris+' per liter) <br>';
+            s += 'Alkohol: '  + v.Alkohol;
+            s += '</article>';
             addToHtml(s);
-          
+
         }
 
     });
