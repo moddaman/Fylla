@@ -1,3 +1,15 @@
+@font-face {
+    font-family: Darleston;
+    src: url(Darleston/Darleston.otf);
+}
+
+h1, h2 {
+        font-family: Darleston, arial;
+        display: inline;
+        font-size: 7em;
+        margin: 8px;
+}
+
 body {
 	background-color: white;
 	font-family: arial;
@@ -55,7 +67,10 @@ article {
     }
 
 .topp {
-
+}
+.undertitle {
+    font-size: 1em;
+    margin-bottom: 8px;
 }
 
 input[type="text"] {
@@ -63,6 +78,7 @@ input[type="text"] {
   background-color: black;
   color: white;
   margin: 0;
+  padding-left: 72px;
   width: 400px;
   height: 50px;
   border-style:none;
