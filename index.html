@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
     <!--- thanks to http://www.appelsiini.net/projects/lazyload/enabled.html for great imageLoader -->
-    <title>Bilder</title>
+    <title>Findo</title>
 
     <script src="jquery-1.11.3.min.js"></script>
     <script src="script.js"></script>
@@ -21,32 +21,33 @@
   <body>
     <div class="content column-container">
 
-        <header>
-<section class="column-container topp">
-      <h1>Findo</h1>
-      <span class="undertitle">Finn din favoritt</span>
-      <section>
-      <section>
-        <form id="searchForm" class="row-container">
-            <input id="searchInput" type="text" placeholder="Søk...">
-            <input type="submit" class="btn-style" value="Submit">
+      <header>
+        <section class="column-container topp">
+          <h1>Findo</h1>
+          <span class="undertitle">Finn din favoritt</span>
+        </section>
+        <div class="header-container">
+          <form id="searchForm" class="row-container">
+            <input id="searchInput" type="text" autofocus>
+            <input type="submit" class="btn-style" value="Søk">
           </form>
-        </section>
-        <section class="typer upper-row-container ">
-          <button class="ol">øl</button>
-          <button class="vin">vin</button>
-          <button class="musserende">musserende</button>
-          <button class="akvavitt">akvavitt</button>
-        </section>
+          <section class="typer upper-row-container ">
+            <button class="ol">øl</button>
+            <button class="vin">vin</button>
+            <button class="musserende">musserende</button>
+            <button class="akvavitt">akvavitt</button>
+          </section>
+        </div>
       </header>
-      <div id="wines">
-       
+     
+
+
+      <div id="wines" class="space-container">
+        
       </div>
+
     </div>
-<!--     s = '<article><h4>' + v.Varenavn + '</h4>';
-    s += 'Pris: ' + v.Pris + ' ( '+v.Literpris+' per liter) <br>';
-    s += 'Alkohol: '  + v.Alkohol;
-    s += '</article>'; -->
+
 
 
     <script type="text/javascript">
