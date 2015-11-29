@@ -1,6 +1,6 @@
 
 // tutorial13.js
-var CommentBox = React.createClass({
+var VinBox = React.createClass({
   getInitialState: function() {
     return {data: []};
   },
@@ -8,7 +8,7 @@ var CommentBox = React.createClass({
     $.ajax({
       url: this.props.url,
       dataType: 'json',
-      cache: false,
+      cache: true,
       success: function(data) {
         this.setState({data: data});
       }.bind(this),
@@ -19,55 +19,54 @@ var CommentBox = React.createClass({
   },
   render: function() {
     return (
-      <div className="commentBox">
-        <h1>Comments</h1>
-        <CommentList data={this.state.data} />
-        <CommentForm />
+      <div className="VinBox">
+        <h1>Alkohol</h1>
+        <VinList data={this.state.data} />
+        <VinForm />
       </div>
     );
   }
 });
 
 
-var CommentList = React.createClass({
+var VinList = React.createClass({
   render: function() {
     var commentNodes = this.props.data.map(function(comment) {
       return (
-        <Comment author={comment.Varenavn} key={comment.Varenummer}>
-          {comment.Varenavn}
-        </Comment>
+        <Vin vin={comment} key={comment.Varenummer}>
+        </Vin>
       );
     });
     return (
-      <div className="commentList">
+      <div className="VinList">
         {commentNodes}
       </div>
     );
   }
 });
 
-var Comment = React.createClass({
-  rawMarkup: function() {
-    var rawMarkup = marked(this.props.children.toString(), {sanitize: true});
-    return { __html: rawMarkup };
-  },
+var Vin = React.createClass({
+
 
   render: function() {
+  	var vin = this.props.vin;
     return (
-      <div className="comment">
-        <h2 className="commentAuthor">
-          {this.props.author}
-        </h2>
-        <span dangerouslySetInnerHTML={this.rawMarkup()} />
-      </div>
+      <article className="vin">
+        <h3 className="title">
+          {vin.Varenavn}
+        <small> {vin.Varetype}</small>
+        </h3>
+
+      	{vin.Alkohol}
+      </article>
     );
   }
 });
 
-var CommentForm = React.createClass({
+var VinForm = React.createClass({
   render: function() {
     return (
-      <div className="commentForm">
+      <div className="VinForm">
         Hello, world! I am a CommentForm.
       </div>
     );
@@ -77,6 +76,6 @@ var CommentForm = React.createClass({
 var jSmall= 'produkt-eksempel.json';
 
 ReactDOM.render(
-  <CommentBox url='produkter.json'  />,
+  <VinBox url='produkter.json'  />,
   document.getElementById('content')
 );
