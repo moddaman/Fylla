@@ -4,66 +4,50 @@ var listInDom;
 
 var MYAPP = MYAPP || {};
 MYAPP.categories = {
-    categoriesList : ["Akevitt", "Portvin", "Vodka", "Druebrennevin", "Whisky", "Likør under 22 %", "Genever", "Likør", "Gin", "Bitter", "Fruktbrennevin", "Vermut", "Aromatisert Svakvin og annen blandet dri", "Øvrig Brennevin under 22 %", "Øvrig Brennevin", "Sherry", "Bitter under 22 %", "Rødvin", "Hvitvin", "Rosévin", "Musserende Vin", "Alkoholfritt", "Rom", "Øl", "Øvrig Sterkvin", "Fruktvin", "Aromatisert Sterkvin", "Musserende Fruktvin", "Madeira", "Øvrig Svakvin"],
-    selectedCategoriesList : ["Rødvin","Øl"],
+    categoriesList: ["Akevitt", "Portvin", "Vodka", "Druebrennevin", "Whisky", "Likør under 22 %", "Genever", "Likør", "Gin", "Bitter", "Fruktbrennevin", "Vermut", "Aromatisert Svakvin og annen blandet dri", "Øvrig Brennevin under 22 %", "Øvrig Brennevin", "Sherry", "Bitter under 22 %", "Rødvin", "Hvitvin", "Rosévin", "Musserende Vin", "Alkoholfritt", "Rom", "Øl", "Øvrig Sterkvin", "Fruktvin", "Aromatisert Sterkvin", "Musserende Fruktvin", "Madeira", "Øvrig Svakvin"],
+    selectedCategoriesList: ["Rødvin", "Øl"],
 
-    createHtmlInput: function(){
+    createHtmlInput: function () {
         var s = '';
 
-        for(var i=0; i<this.categoriesList.length;i++){
+        for (var i = 0; i < this.categoriesList.length; i++) {
             var category = this.categoriesList[i];
-            var sChecked = this.selectedCategoriesList.indexOf(category) ==-1 ? '' : 'checked="checked"';
-            s += '<input type="checkbox" class="filled-in" id="' + category + '" '+sChecked+' />';
+            var sChecked = this.selectedCategoriesList.indexOf(category) == -1 ? '' : 'checked="checked"';
+            s += '<input type="checkbox" class="filled-in" id="' + category + '" ' + sChecked + ' />';
             s += '<label for="' + category + '">' + category + '</label>';
         }
         return s;
     },
 
-    isSelected: function(category){
-        return this.selectedCategoriesList.indexOf(category) !==-1;
+    isSelected: function (category) {
+        return this.selectedCategoriesList.indexOf(category) !== -1;
     },
-    changeStatus: function(category){
+    changeStatus: function (category) {
         var indexOf = this.selectedCategoriesList.indexOf(category);
-        if(indexOf ==-1){
+        if (indexOf == -1) {
             this.selectedCategoriesList.push(category);
-        }else{
-            this.selectedCategoriesList.splice(indexOf,1);
+        } else {
+            this.selectedCategoriesList.splice(indexOf, 1);
         }
     }
 
 };
 
 
-
 $(document).ready(function () {
     createCategoriesHtml();
 
 
-    $.getJSON("http://localhost:3000/viner", function (data) {
-        var largest=0;
-        items = [data.length];
+    $.getJSON("data/produkterFinalId.json", function (data) {
+        items = data.viner;
 
-        for (var i = 0; i < data.length; i++) {
-            items[i] = data[i];
-            items[i].best = items[i].Literpris / items[i].Alkohol;
-            if(items[i].fylde>largest)
-                largest=items[i].fylde;
-        }
-        console.log('scale: '+largest);
         items.sort(function (a, b) {
-            return parseFloat(a.best) - parseFloat(b.best);
+            return parseFloat(a.alkholpris) - parseFloat(b.alkholpris);
         });
 
 
         console.log('Vin size: ' + items.length);
-        //add100FirstRandomShitFuck();
         search('');
-
-
-
-        var test = 'Hansa IPA Ekstra Spesial Øl'.toLowerCase();
-        var b = test.indexOf('hansa');
-        console.log(b);
 
     });
 
@@ -96,56 +80,6 @@ $(document).ready(function () {
 
     }
 
-    /*
-     <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
-     <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-     */
-
-    //function searchImage(){
-    //    google.load('search', '1');
-    //
-    //    function searchComplete() {
-    //
-    //        // Check that we got results
-    //        if (imageSearch.results && imageSearch.results.length > 0) {
-    //
-    //            console.log(imageSearch.results[0]);
-    //        }
-    //    }
-    //
-    //
-    //    function OnLoad() {
-    //
-    //        // Create an Image Search instance.
-    //        imageSearch = new google.search.ImageSearch();
-    //
-    //        // Set searchComplete as the callback function when a search is
-    //        // complete.  The imageSearch object will have results in it.
-    //        imageSearch.setSearchCompleteCallback(this, searchComplete, null);
-    //
-    //        // Find me a beautiful car.
-    //        imageSearch.execute("Subaru STI");
-    //
-    //        // Include the required Google branding
-    //       // google.search.Search.getBranding('branding');
-    //    }
-    //    google.setOnLoadCallback(OnLoad);
-    //}
-
-    /*
-     <div class="row">
-     <div class="col s9">
-     <span class="title">Hansa IPA Ekstra Spesial</span>
-     <p>Øl<br>Pris: 32.6 ( 95.8 per liter) 0.33L<br>Best : 15.97 (pris per Alkohol)</p>
-
-     </div>
-     <div class="col s3">
-        scale()
-     </div>
-
-     </div>
-     </div>
-     */
     function addListMaterialToHtml(list) {
 
         var s = '';
@@ -162,9 +96,9 @@ $(document).ready(function () {
             s += '  <p>' + v.varetype + '<br>';
             s += 'Pris: ' + v.pris + ' ( ' + v.literpris + ' per liter) ' + v.volum + 'L<br>';
             s += 'Best : ' + v.alkholpris.toFixed(2) + ' (pris per Alkohol)</p>';
-            s+='<i class="material-icons">location_on</i>'+v.land+', '+v.distrikt+', '+v.underdistrikt;
+            s += '<i class="material-icons">location_on</i>' + v.land + ', ' + v.distrikt + ', ' + v.underdistrikt;
             s += '</div >' +
-                '<div class="col s3">' + createScaleHtml(v)+
+                '<div class="col s3">' + createScaleHtml(v) +
                 '</div>';
             //s += '</div>';
             s += '</li>';
@@ -175,10 +109,10 @@ $(document).ready(function () {
 
     }
 
-    function createScaleHtml(vin){
-        return createSingleScale('Fylde','light-blue lighten-4','blue',vin.fylde) +
-            createSingleScale('Friskhet','light-green lighten-4','green',vin.friskhet)+
-            createSingleScale('Garvestoffer','red lighten-4','red',vin.garvestoffer);
+    function createScaleHtml(vin) {
+        return createSingleScale('Fylde', 'light-blue lighten-4', 'blue', vin.fylde) +
+            createSingleScale('Friskhet', 'light-green lighten-4', 'green', vin.friskhet) +
+            createSingleScale('Garvestoffer', 'red lighten-4', 'red', vin.garvestoffer);
     }
 
     /*
@@ -188,12 +122,12 @@ $(document).ready(function () {
      </div>
      */
     // scale is from[ 0 to 12]
-    function createSingleScale(name, color1, color2, scale){
-        var newScale= (scale/12)*100;
-        var s='<h6>'+name+'</h6>';
-        s+='  <div class="progress '+color1+'">';
-        s+=' <div class="determinate '+color2+'" style="width: '+newScale+'%"></div>';
-        s+='</div>';
+    function createSingleScale(name, color1, color2, scale) {
+        var newScale = (scale / 12) * 100;
+        var s = '<h6>' + name + '</h6>';
+        s += '  <div class="progress ' + color1 + '">';
+        s += ' <div class="determinate ' + color2 + '" style="width: ' + newScale + '%"></div>';
+        s += '</div>';
         return s;
     }
 
@@ -206,8 +140,8 @@ $(document).ready(function () {
         $('#categories').empty();
         $('#categories').html(MYAPP.categories.createHtmlInput());
 
-        $('input:checkbox').change(function() {
-            console.log(this.id +' : '+$(this).is(":checked"));
+        $('input:checkbox').change(function () {
+            console.log(this.id + ' : ' + $(this).is(":checked"));
             MYAPP.categories.changeStatus(this.id);
             updateSearch();
         });
@@ -237,7 +171,7 @@ $(document).ready(function () {
     //    console.log(categories);
     //}
 
-    function updateSearch(){
+    function updateSearch() {
         search($("#searchInput").val());
     }
 
@@ -251,7 +185,7 @@ $(document).ready(function () {
         var list = [];
         for (var i = 0; i < items.length; i++) {
 
-            if(!MYAPP.categories.isSelected(items[i].varetype)){
+            if (!MYAPP.categories.isSelected(items[i].varetype)) {
                 continue;
             }
 
