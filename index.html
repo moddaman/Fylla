@@ -1,65 +1,214 @@
-  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-  
-  <html xmlns="http://www.w3.org/1999/xhtml">
-  <html lang="en">
-  <head>
-    <link href="stylesheet.css" rel="stylesheet" type="text/css">
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+<!DOCTYPE html>
+<html>
+<head>
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+
+    <link rel="stylesheet" href="node_modules/materialize-css/dist/css/materialize.min.css">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--- thanks to http://www.appelsiini.net/projects/lazyload/enabled.html for great imageLoader -->
     <title>Findo</title>
 
-    <script src="jquery-1.11.3.min.js"></script>
-    
-    <script src="script.js"></script>
-
-  </head>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/materialize-css/dist/js/materialize.min.js"></script>
 
 
+    <script src="https://www.google.com/jsapi"></script>
+    <script src="scripts/scriptWithDb.js"></script>
 
 
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Findo</title>
+</head>
 
-  <body>
-    <div class="content column-container">
+<body>
+<!--Import jQuery before materialize.js-->
 
-      <header>
-        <section class="column-container topp">
-          <h1>Findo</h1>
-          <span class="undertitle">Finn din favoritt</span>
-        </section>
-        <div class="header-container">
-          <form id="searchForm" class="row-container">
+<nav>
+    <div class="nav-wrapper">
+        <a href="#" class="brand-logo">Findo</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="sass.html">Sass</a></li>
+            <li><a href="badges.html">Components</a></li>
+            <li><a href="collapsible.html">JavaScript</a></li>
+        </ul>
+    </div>
+</nav>
+
+
+<div class="container">
+
+
+    <div class="header-container">
+        <form id="searchForm" class="row-container">
             <input id="searchInput" type="text" autofocus>
-            <input type="submit" class="btn-style" value="Søk">
-          </form>
-          <section class="typer upper-row-container ">
-            <button class="ol">øl</button>
-            <button class="vin">vin</button>
-            <button class="musserende">musserende</button>
-            <button class="akvavitt">akvavitt</button>
-          </section>
-        </div>
-      </header>
-     
+            <button class="btn waves-effect waves-light" type="submit" name="action">Søk
+                <i class="material-icons right"></i>
+            </button>
 
-
-      <div id="wines" class="space-container">
-        
-      </div>
-
+        </form>
     </div>
 
 
+    <h4>Filtrer</h4>
+    <ul class="collapsible" data-collapsible="accordion">
 
-    <script type="text/javascript">
+        <li>
+            <div class="collapsible-header"><i class="material-icons">whatshot</i>Favoritter</div>
+            <div class="collapsible-body"><p>
+                <input type="checkbox" class="filled-in" id="Øl" checked="checked">
+                <label for="Øl">Øl</label>
+                <input type="checkbox" class="filled-in" id="Rødvin" checked="checked">
+                <label for="Rødvin">Rødvin</label>
+            </p>
+            </div>
+        </li>
+        <li>
+            <div class="collapsible-header"><i class="material-icons">filter_drama</i>Vin</div>
+            <div class="collapsible-body">
+                <p>
+                    <input type="checkbox" class="filled-in" id="Rødvin">
+                    <label for="Rødvin">Rødvin</label>
+                    <input type="checkbox" class="filled-in" id="Hvitvin">
+                    <label for="Hvitvin">Hvitvin</label>
+                    <input type="checkbox" class="filled-in" id="Rosévin">
+                    <label for="Rosévin">Rosévin</label>
+                    <input type="checkbox" class="filled-in" id="Musserende Vin">
+                    <label for="Musserende Vin">Musserende Vin</label>
+                    <input type="checkbox" class="filled-in" id="Øvrig Svakvin">
+                    <label for="Øvrig Svakvin">Øvrig Svakvin</label>
+                    <input type="checkbox" class="filled-in" id="Øvrig Sterkvin">
+                    <label for="Øvrig Sterkvin">Øvrig Sterkvin</label>
+                    <input type="checkbox" class="filled-in" id="Fruktvin">
+                    <label for="Fruktvin">Fruktvin</label>
+                    <input type="checkbox" class="filled-in" id="Aromatisert Sterkvin">
+                    <label for="Aromatisert Sterkvin">Aromatisert Sterkvin</label>
+                    <input type="checkbox" class="filled-in" id="Musserende Fruktvin">
+                    <label for="Musserende Fruktvin">Musserende Fruktvin</label>
+                    <input type="checkbox" class="filled-in" id="Fruktbrennevin">
+                    <label for="Fruktbrennevin">Fruktbrennevin</label>
+                    <input type="checkbox" class="filled-in" id="Aromatisert Svakvin og annen blandet dri">
+                    <label for="Aromatisert Svakvin og annen blandet dri">Aromatisert Svakvin og annen blandet
+                        dri</label>
+                    <input type="checkbox" class="filled-in" id="Portvin">
+                    <label for="Portvin">Portvin</label>
+
+                    <input type="checkbox" class="filled-in" id="Druebrennevin">
+                    <label for="Druebrennevin">Druebrennevin</label>
+                </p>
+            </div>
+        </li>
+        <li>
+            <div class="collapsible-header"><i class="material-icons">place</i>Sterke saker</div>
+            <div class="collapsible-body"><p>
+                <input type="checkbox" class="filled-in" id="Vodka">
+                <label for="Vodka">Vodka</label>
+                <input type="checkbox" class="filled-in" id="Whisky">
+                <label for="Whisky">Whisky</label>
+                <input type="checkbox" class="filled-in" id="Rom">
+                <label for="Rom">Rom</label>
+                <input type="checkbox" class="filled-in" id="Likør">
+                <label for="Likør">Likør</label>
+                <input type="checkbox" class="filled-in" id="Gin">
+                <label for="Gin">Gin</label>
+                <input type="checkbox" class="filled-in" id="Akevitt">
+                <label for="Akevitt">Akevitt</label>
+            </p></div>
+        </li>
+        <li>
+            <div class="collapsible-header"><i class="material-icons">whatshot</i>Annet</div>
+            <div class="collapsible-body"><p>
+                <input type="checkbox" class="filled-in" id="Likør under 22 %">
+                <label for="Likør under 22 %">Likør under 22 %</label>
+                <input type="checkbox" class="filled-in" id="Genever">
+                <label for="Genever">Genever</label>
+
+                <input type="checkbox" class="filled-in" id="Bitter">
+                <label for="Bitter">Bitter</label>
+
+                <input type="checkbox" class="filled-in" id="Vermut">
+                <label for="Vermut">Vermut</label>
+                <input type="checkbox" class="filled-in" id="Øvrig Brennevin under 22 %">
+                <label for="Øvrig Brennevin under 22 %">Øvrig Brennevin under 22 %</label>
+                <input type="checkbox" class="filled-in" id="Øvrig Brennevin">
+                <label for="Øvrig Brennevin">Øvrig Brennevin</label>
+                <input type="checkbox" class="filled-in" id="Sherry">
+                <label for="Sherry">Sherry</label>
+                <input type="checkbox" class="filled-in" id="Bitter under 22 %">
+                <label for="Bitter under 22 %">Bitter under 22 %</label>
+
+                <input type="checkbox" class="filled-in" id="Alkoholfritt">
+                <label for="Alkoholfritt">Alkoholfritt</label>
+
+                <input type="checkbox" class="filled-in" id="Madeira">
+                <label for="Madeira">Madeira</label>
+
+            </p></div>
+        </li>
+    </ul>
+
+    <ul class="pagination center">
+        <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+        <li class="active"><a href="#!">1</a></li>
+        <li class="waves-effect"><a href="#!">2</a></li>
+        <li class="waves-effect"><a href="#!">3</a></li>
+        <li class="waves-effect"><a href="#!">4</a></li>
+        <li class="waves-effect"><a href="#!">5</a></li>
+        <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+    </ul>
 
 
-    </script>
-  </body>
-  </html>
+  <!--  <ul class="collection">
+
+        <li class="collection-item avatar">
+            <i class="material-icons circle">folder</i>
+
+            <div class="row">
+                <div class="col s9">
+                    <span class="title">Hansa IPA Ekstra Spesial</span>
+                    <p>Øl<br>Pris: 32.6 ( 95.8 per liter) 0.33L<br>Best : 15.97 (pris per Alkohol)</p>
+
+                </div>
+                <div class="col s3">
+                    <h6>Fylde</h6>
+                    <div class="progress light-blue lighten-4">
+                        <div class="determinate blue" style="width: 70%"></div>
+                    </div>
+                    <h6>Friskhet</h6>
+                    <div class="progress  light-green lighten-4">
+                        <div class="determinate green" style="width: 70%"></div>
+                    </div>
+                    <h6>Garvestoffer</h6>
+                    <div class="progress red lighten-4 ">
+                        <div class="determinate red" style="width: 70%"></div>
+                    </div>
+
+                </div>
+            </div>
+        </li>
+
+    </ul>-->
 
 
 
+    <ul id="wines" class="collection">
+
+        <h4>Laster data ... </h4>
+
+        <div class="progress">
+            <div class="indeterminate"></div>
+        </div>
+    </ul>
+
+
+</div>
+
+
+</body>
+</html>
 
 
 

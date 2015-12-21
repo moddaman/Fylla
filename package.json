@@ -1,0 +1,29 @@
+{
+  "name": "fylla",
+  "version": "1.0.0",
+  "description": "Kjør med: python -m SimpleHTTPServer",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "frontend": "node app.js",
+    "backend": "json-server --watch data/produkterFinalId.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moddaman/Fylla.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/moddaman/Fylla/issues"
+  },
+  "homepage": "https://github.com/moddaman/Fylla#readme",
+  "dependencies": {
+    "connect": "^3.4.0",
+    "jquery": "^2.1.4",
+    "json-server": "^0.8.4",
+    "materialize-css": "^0.97.3",
+    "requirejs": "^2.1.22",
+    "serve-static": "^1.10.0"
+  }
+}

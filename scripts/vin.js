@@ -6,7 +6,7 @@ var VinBox = React.createClass({
   },
   componentDidMount: function() {
     $.ajax({
-      url: this.props.url,
+      url: this.props.url+'?_start=0&_end=10',
       dataType: 'json',
       cache: true,
       success: function(data) {
@@ -19,10 +19,11 @@ var VinBox = React.createClass({
   },
   render: function() {
     return (
-      <div className="VinBox">
+
+      <div id="wines" className="space-container">
         <h1>Alkohol</h1>
-        <VinList data={this.state.data} />
         <VinForm />
+        <VinList data={this.state.data} />
       </div>
     );
   }
@@ -34,13 +35,13 @@ var Vin = React.createClass({
   render: function() {
     var vin = this.props.vin;
     return (
-      <article className="vin">
-        <h3 className="title">
-          {vin.Varenavn}
-        <small> {vin.Varetype}</small>
-        </h3>
+      <article className="">
+        <h4 className="title">
+          {vin.varenavn}
+        <small> {vin.varetype}</small>
+        </h4>
 
-        {vin.Alkohol}
+        {vin.alkohol}
       </article>
     );
   }
@@ -49,9 +50,9 @@ var Vin = React.createClass({
 
 var VinList = React.createClass({
   render: function() {
-    var commentNodes = this.props.data.map(function(comment) {
+    var commentNodes = this.props.data.slice(0,100).map(function(comment) {
       return (
-        <Vin vin={comment} key={comment.Varenummer}>
+        <Vin vin={comment} key={comment.varenummer}>
         </Vin>
       );
     });
@@ -68,9 +69,18 @@ var VinList = React.createClass({
 var VinForm = React.createClass({
   render: function() {
     return (
-      <div className="VinForm">
-        Hello, world! I am a CommentForm.
-      </div>
+        <div className="header-container">
+          <form id="searchForm" className="row-container">
+            <input id="searchInput" type="text" autofocus/>
+              <input type="submit" className="btn-style" value="Søk"/>
+          </form>
+          <section className="typer upper-row-container ">
+            <button className="ol">øl</button>
+            <button className="vin">vin</button>
+            <button className="musserende">musserende</button>
+            <button className="akvavitt">akvavitt</button>
+          </section>
+        </div>
     );
   }
 });
@@ -78,6 +88,6 @@ var VinForm = React.createClass({
 var jSmall= 'produkt-eksempel.json';
 
 ReactDOM.render(
-  <VinBox url='produkter.json'  />,
+  <VinBox url='http://localhost:3000/viner'  />,
   document.getElementById('content')
 );
