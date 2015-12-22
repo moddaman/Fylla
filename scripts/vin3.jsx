@@ -1,20 +1,39 @@
 var ProductRow = React.createClass({
     render: function () {
         var vin = this.props.product;
+
+        var vinImg;
+        if (this.props.showPictures) {
+            var url = 'http://bilder.vinmonopolet.no/cache/50x50/' + vin.id + '-1.jpg';
+            vinImg = <img src={url} alt="boohoo" className="img-responsive"/>;
+        }
+
         return (
             <li className="collection-item avatar">
                 <i className={this.customIcon()}>local_drink</i>
                 <span className="alkhol-category">{vin.varetype}</span>
                 <div className="row">
-                    <div className="col s9">
-                        <span className="title">  {vin.varenavn}</span>
-
+                    <div className="col s5">
+                        <span className="title">  {vin.varenavn}
+                            <small> {vin.id}</small></span>
                         <ul>
-                            <li>Pris: {vin.pris} kr ({vin.literpris} kr/l)</li>
-                            <li>Varetype: {vin.varetype}</li>
-                            <li>Best: {vin.alkholpris.toFixed(2)} pris per alkohol</li>
-                            <li> {vin.land}, {vin.distrikt}, {vin.underdistrikt}</li>
+                            <li>{vin.smak}</li>
+                            <li>{vin.lukt}</li>
+                            <li><i className="material-icons">flag</i>{vin.land}, {vin.distrikt}, {vin.underdistrikt}
+                            </li>
                         </ul>
+                        {vinImg}
+                    </div>
+                    <div className="col s4">
+                        <div className="card blue-grey darken-1">
+                            <div className="card-content white-text">
+                                <ul>
+                                    <li>Kr. {vin.pris} ({vin.volum}L). ({vin.literpris} Kr/l)</li>
+                                    <li>Pris/alkohol: Kr {vin.alkholpris.toFixed(2)}</li>
+                                </ul>
+                            </div>
+                        </div>
+
 
                     </div>
                     <div className="col s3">
@@ -47,7 +66,6 @@ var ProductRow = React.createClass({
             case 'Rosévin':
                 color = 'red lighten-4';
                 break;
-
 
             default:
                 color = 'black';
@@ -87,13 +105,13 @@ var ProductTable = React.createClass({
 
         console.log('Loop :', selectedCategories);
 
-        var countMatches=0,countTotal=0;
+        var countMatches = 0, countTotal = 0;
         this.props.products.forEach(function (product) {
             countTotal++;
 
             if (selectedCategories.indexOf(product.varetype) <= -1) {
 
-               return;
+                return;
             }
 
 
@@ -105,12 +123,14 @@ var ProductTable = React.createClass({
             if (currElements > maxElements)
                 return;//HACK for speeed
             currElements++;
-            rows.push(<ProductRow product={product} key={product.id}/>);
+            rows.push(<ProductRow product={product} key={product.id} showPictures={this.props.showPictures}/>);
 
         }.bind(this));
         return (
             <ul className="collection">
-                <li className="collection-item">Antall resultater : {countMatches} av {countTotal} (only showing {rows.length}) </li>
+                <li className="collection-item deep-purple lighten-1 white-text">Antall resultater : {countMatches} av {countTotal} (only
+                    showing {rows.length})
+                </li>
                 {rows}
             </ul>
         );
@@ -124,8 +144,8 @@ var SearchBar = React.createClass({
             this.refs.filterTextInput.value
         );
     },
-    clickedCheckBox: function(id){
-        console.log('click high layer',id);
+    clickedCheckBox: function (id) {
+        console.log('click high layer', id);
 
         this.props.handleUserInputCheckbox(
             this.__getOrRemoveCheck(id)
@@ -156,9 +176,39 @@ var SearchBar = React.createClass({
                     onChange={this.handleChange}
                 />
 
-                <CategoryCheckbox selectedCategories={this.props.selectedCategories} clickedCheckBox={this.clickedCheckBox}/>
+                <ul className="collapsible" data-collapsible="accordion">
+                    <li>
+                        <CategoryCheckbox selectedCategories={this.props.selectedCategories}
+                                          clickedCheckBox={this.clickedCheckBox}/>
+                    </li>
+                    <li>
+                        <div className="collapsible-header"><i className="material-icons">settings</i>Instillinger</div>
+                        <div className="collapsible-body">
+
+                            <div className="switch">
+                                <label>
+                                    bilder :
+                                    Off
+                                    <input type="checkbox" onChange={this.props.clickedSettingsPictureOnOff}/>
+                                    <span className="lever"></span>
+                                    On
+                                </label>
+                            </div>
+
+                        </div>
+                    </li>
+
+
+                </ul>
+
+
+
+
             </form>
         );
+    },
+    myOnchange: function () {
+        console.log('change')
     }
 });
 
@@ -190,9 +240,9 @@ var CategoryCheckbox = React.createClass({
     render: function () {
 
         var ind = this.state.categoriesList.indexOf('Øl');
-        console.log('IndexOf Øl: ',ind)
+        console.log('IndexOf Øl: ', ind)
         var selectedCategories = this.props.selectedCategories;
-        console.log('CategoryCheckBox.render () selectedCategories:'+ selectedCategories+' length='+selectedCategories.length);
+        console.log('CategoryCheckBox.render () selectedCategories:' + selectedCategories + ' length=' + selectedCategories.length);
         var checks = this.state.categoriesList.map(function (d) {
             var isChecked = selectedCategories.indexOf(d) !== -1;
             return (
@@ -205,19 +255,19 @@ var CategoryCheckbox = React.createClass({
             );
         }.bind(this));
         return (
-            <ul className="collapsible" data-collapsible="accordion">
-                <li>
-                    <div className="collapsible-header"><i className="material-icons">filter_drama</i>Filtre</div>
-                    <div className="collapsible-body">
 
-                        <div className="row">
-                            {checks}
-                        </div>
+            <li>
+                <div className="collapsible-header"><i className="material-icons">filter_list</i>Filtrer</div>
+                <div className="collapsible-body">
 
+                    <div className="row">
+                        {checks}
                     </div>
-                </li>
 
-            </ul>
+                </div>
+            </li>
+
+
 
 
         );
@@ -260,9 +310,9 @@ var FilterableProductTable = React.createClass({
     getInitialState: function () {
         return {
             filterText: '',
-            inStockOnly: false,
             data: [],
-            selectedCategories: ["Øl", "Rødvin","Øl"]
+            selectedCategories: ["Øl", "Rødvin"],
+            showPictures: false
         };
     },
     componentDidMount: function () {
@@ -284,6 +334,13 @@ var FilterableProductTable = React.createClass({
         });
     },
 
+
+    clickedSettingsPictureOnOff: function () {
+        this.setState({
+            showPictures: !this.state.showPictures
+        });
+
+    },
     handleUserInput: function (filterText) {
         this.setState({
             filterText: filterText
@@ -298,23 +355,20 @@ var FilterableProductTable = React.createClass({
 
     render: function () {
         return (
-
             <div>
-
-
                 <SearchBar
                     filterText={this.state.filterText}
-                    inStockOnly={this.state.inStockOnly}
                     selectedCategories={this.state.selectedCategories}
                     onUserInput={this.handleUserInput}
                     handleUserInputCheckbox={this.handleUserInputCheckbox}
+                    clickedSettingsPictureOnOff={this.clickedSettingsPictureOnOff}
                 />
 
                 <ProductTable
                     products={this.state.data}
                     filterText={this.state.filterText}
                     selectedCategories={this.state.selectedCategories}
-                    inStockOnly={this.state.inStockOnly}
+                    showPictures={this.state.showPictures}
                 />
             </div>
         );
