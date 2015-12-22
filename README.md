@@ -1,4 +1,6 @@
 # Fylla
 
 Kjør med:
-python -m SimpleHTTPServer
+node app.js
+eller
+npm run frontend

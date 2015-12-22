@@ -76,12 +76,12 @@ var ProductRow = React.createClass({
 });
 var ScaleBar = React.createClass({
     render: function () {
-        var progresStyle = {
+        var progressStyle = {
             width: (this.props.num / 12) * 100 + '%'
         };
         return (
             <div className={this.dynamicClass()}>
-                <div className={this.dynamicClass2()} style={progresStyle}></div>
+                <div className={this.dynamicClass2()} style={progressStyle}></div>
             </div>
         );
     },
@@ -110,10 +110,8 @@ var ProductTable = React.createClass({
             countTotal++;
 
             if (selectedCategories.indexOf(product.varetype) <= -1) {
-
                 return;
             }
-
 
             if (product.varenavn.indexOf(this.props.filterText) === -1) {
                 return;
@@ -128,7 +126,8 @@ var ProductTable = React.createClass({
         }.bind(this));
         return (
             <ul className="collection">
-                <li className="collection-item deep-purple lighten-1 white-text">Antall resultater : {countMatches} av {countTotal} (only
+                <li className="collection-item deep-purple lighten-1 white-text">Antall resultater : {countMatches}
+                    av {countTotal} (only
                     showing {rows.length})
                 </li>
                 {rows}
@@ -145,36 +144,22 @@ var SearchBar = React.createClass({
         );
     },
     clickedCheckBox: function (id) {
-        console.log('click high layer', id);
-
-        this.props.handleUserInputCheckbox(
-            this.__getOrRemoveCheck(id)
-        );
-    },
-
-    __getOrRemoveCheck: function (id) {
         var currentList = this.props.selectedCategories.slice();
         var indexOf = currentList.indexOf(id);
         if (indexOf <= -1) {
             currentList.push(id);
-
         } else {
             currentList.splice(indexOf, 1);
         }
-        return currentList;
-
+        this.props.handleUserInputCheckbox(currentList);
     },
+
 
     render: function () {
         return (
             <form>
-                <input
-                    type="text"
-                    placeholder="Search..."
-                    value={this.props.filterText}
-                    ref="filterTextInput"
-                    onChange={this.handleChange}
-                />
+                <input type="text" placeholder="Search..." value={this.props.filterText}
+                    ref="filterTextInput" onChange={this.handleChange}/>
 
                 <ul className="collapsible" data-collapsible="accordion">
                     <li>
@@ -197,18 +182,9 @@ var SearchBar = React.createClass({
 
                         </div>
                     </li>
-
-
                 </ul>
-
-
-
-
             </form>
         );
-    },
-    myOnchange: function () {
-        console.log('change')
     }
 });
 
@@ -219,17 +195,7 @@ var CategoryCheckbox = React.createClass({
         };
     },
     componentDidMount: function () {
-        //$.ajax({
-        //    url: 'data/vinKategorier.json',
-        //    dataType: 'json',
-        //    cache: true,
-        //    success: function (data) {
-        //        this.setState({categories: data});
-        //    }.bind(this),
-        //    error: function (xhr, status, err) {
-        //        console.error(this.props.url, status, err.toString());
-        //    }.bind(this)
-        //});
+        //To make jquery collapse work on dynamic content
         $(document).ready(function () {
             $('.collapsible').collapsible({
                 accordion: false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
@@ -238,11 +204,7 @@ var CategoryCheckbox = React.createClass({
 
     },
     render: function () {
-
-        var ind = this.state.categoriesList.indexOf('Øl');
-        console.log('IndexOf Øl: ', ind)
         var selectedCategories = this.props.selectedCategories;
-        console.log('CategoryCheckBox.render () selectedCategories:' + selectedCategories + ' length=' + selectedCategories.length);
         var checks = this.state.categoriesList.map(function (d) {
             var isChecked = selectedCategories.indexOf(d) !== -1;
             return (
@@ -259,32 +221,16 @@ var CategoryCheckbox = React.createClass({
             <li>
                 <div className="collapsible-header"><i className="material-icons">filter_list</i>Filtrer</div>
                 <div className="collapsible-body">
-
                     <div className="row">
                         {checks}
                     </div>
-
                 </div>
             </li>
-
-
-
-
         );
     },
     __changeSelection: function (id) {
         this.props.clickedCheckBox(id);
-    },
-
-
-    //__changeAllChecks: function () {
-    //    var value = this.refs.globalSelector.getDOMNode().checked;
-    //    var state = this.state.data.map(function (d) {
-    //        return {id: d.id, selected: value};
-    //    });
-    //
-    //    this.setState({data: state});
-    //}
+    }
 });
 
 
@@ -376,7 +322,7 @@ var FilterableProductTable = React.createClass({
 });
 
 
-var PRODUCTS = [{
+var exampleDemo = [{
         "Datotid": "2015-10-11T00:24:16",
         "varenummer": "1101",
         "varenavn": "Løiten Linie",
@@ -417,6 +363,6 @@ var PRODUCTS = [{
     ;
 
 ReactDOM.render(
-    <FilterableProductTable products={PRODUCTS} url='data/produkterFinalId.json'/>,
+    <FilterableProductTable url='data/produkterFinalId.json'/>,
     document.getElementById('main')
 );
