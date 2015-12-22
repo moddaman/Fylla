@@ -1,0 +1,13 @@
+{"categories":{
+  "Rødvin" : ["Rødvin"],
+  "Hvitvin": ["Hvitvin"],
+  "Rosévin":["Rosévin"],
+  "Musserende Vin":["Musserende Vin"],
+  "Fruktvin":["Fruktvin"],
+  "Sterkvin":["Sherry","Vermut","Madeira","Portvin","Øvrig Sterkvin"],
+  "Brennevin":["Durebrennevin","Whisky","Vodka","Likør under 22 %","Likør","Fruktbrennevin"],
+  "Øl":["Øl"],
+  "Alkoholfritt":["Alkoholfritt"],
+  "Annet":[]
+}
+}
