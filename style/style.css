@@ -1,0 +1,9 @@
+.alkhol-category {
+    position: absolute;
+    overflow: hidden;
+    left: 15px;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 106px;
+
+}

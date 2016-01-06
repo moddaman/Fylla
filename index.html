@@ -1,82 +1,50 @@
-  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-  
-  <html xmlns="http://www.w3.org/1999/xhtml">
-  <html lang="en">
-  <head>
-    <link href="stylesheet.css" rel="stylesheet" type="text/css">
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-    <!--- thanks to http://www.appelsiini.net/projects/lazyload/enabled.html for great imageLoader -->
+<!-- indexOld.html -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8"/>
     <title>Findo</title>
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <script src="jquery-1.11.3.min.js"></script>
-    
-    <script src="script.js"></script>
-
-  </head>
+    <link rel="stylesheet" href="node_modules/materialize-css/dist/css/materialize.min.css">
+    <link rel="stylesheet" href="style/style.css">
 
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/materialize-css/dist/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"></script>
 
 
-
-  <body>
-    <div class="content column-container">
-
-      <header>
-        <section class="column-container topp">
-          <h1>Findo</h1>
-          <span class="undertitle">Finn din favoritt</span>
-        </section>
-        <div class="header-container">
-          <form id="searchForm" class="row-container">
-            <input id="searchInput" type="text" autofocus>
-            <input type="submit" class="btn-style" value="Søk">
-          </form>
-          <section class="typer upper-row-container ">
-            <button class="ol">øl</button>
-            <button class="vin">vin</button>
-            <button class="musserende">musserende</button>
-            <button class="akvavitt">akvavitt</button>
-          </section>
-        </div>
-      </header>
-     
-
-
-      <div id="wines" class="space-container">
-        
-      </div>
-
+</head>
+<body>
+<nav>
+    <div class="nav-wrapper  deep-purple ">
+        <a href="#" class="brand-logo center">Findo</a>
+       <!-- <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="sass.html">Sass</a></li>
+            <li><a href="badges.html">Components</a></li>
+            <li><a href="collapsible.html">JavaScript</a></li>
+        </ul>-->
     </div>
+</nav>
+
+<div class="container">
+
+</div>
+
+<div id="main" class="container">
+    <!-- This element's contents will be replaced with your component. -->
+</div>
+<script type="text/babel" src="scripts/vin3.jsx"></script>
+<script type="text/babel">
+    // To get started with this tutorial running your own code, simply remove // the script tag loading scripts/example.js and start writing code here.
+</script>
 
 
+</body>
 
-    <script type="text/javascript">
-
-
-    </script>
-  </body>
-  </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</html>
